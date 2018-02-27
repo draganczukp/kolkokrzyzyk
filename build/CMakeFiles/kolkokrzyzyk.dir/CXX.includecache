@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/killermenpl/dev/kolkokrzyzyk/src/main/main.cpp
+main.h
+/home/killermenpl/dev/kolkokrzyzyk/src/main/main.h
+
+/home/killermenpl/dev/kolkokrzyzyk/src/main/main.h
+iostream
+-
+math.h
+-
+stdio.h
+-
+stdlib.h
+-
+

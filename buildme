@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+pushd build
+cmake ..
+clear
+make
+./example
+
+popd

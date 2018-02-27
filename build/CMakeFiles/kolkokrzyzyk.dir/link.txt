@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/kolkokrzyzyk.dir/src/main/main.cpp.o  -o kolkokrzyzyk -lm 

@@ -1,0 +1,2 @@
+tmux new "/usr/bin/nvim -c \"source ./dev.vim\"; read" ';'\
+			 new-window "zsh; read"

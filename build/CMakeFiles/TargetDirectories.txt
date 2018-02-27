@@ -1,0 +1,9 @@
+/home/killermenpl/dev/kolkokrzyzyk/build/CMakeFiles/install/strip.dir
+/home/killermenpl/dev/kolkokrzyzyk/build/CMakeFiles/install/local.dir
+/home/killermenpl/dev/kolkokrzyzyk/build/CMakeFiles/install.dir
+/home/killermenpl/dev/kolkokrzyzyk/build/CMakeFiles/package.dir
+/home/killermenpl/dev/kolkokrzyzyk/build/CMakeFiles/package_source.dir
+/home/killermenpl/dev/kolkokrzyzyk/build/CMakeFiles/kolkokrzyzyk.dir
+/home/killermenpl/dev/kolkokrzyzyk/build/CMakeFiles/edit_cache.dir
+/home/killermenpl/dev/kolkokrzyzyk/build/CMakeFiles/rebuild_cache.dir
+/home/killermenpl/dev/kolkokrzyzyk/build/CMakeFiles/list_install_components.dir
