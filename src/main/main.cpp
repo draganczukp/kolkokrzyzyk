@@ -7,58 +7,14 @@ bool gameover = false;
 bool player = true;
 int turns = 0;
 
-char grid[9][3][3] = {
-	{
-		{' ',' ',' '},
-		{' ',' ',' '},
-		{' ',' ',' '}
-	},
-	{
-		{' ',' ',' '},
-		{' ',' ',' '},
-		{' ',' ',' '}
-	},
-	{
-		{' ',' ',' '},
-		{' ',' ',' '},
-		{' ',' ',' '}
-	},
-	{
-		{' ',' ',' '},
-		{' ',' ',' '},
-		{' ',' ',' '}
-	},
-	{
-		{' ',' ',' '},
-		{' ',' ',' '},
-		{' ',' ',' '}
-	},
-	{
-		{' ',' ',' '},
-		{' ',' ',' '},
-		{' ',' ',' '}
-	},
-	{
-		{' ',' ',' '},
-		{' ',' ',' '},
-		{' ',' ',' '}
-	},
-	{
-		{' ',' ',' '},
-		{' ',' ',' '},
-		{' ',' ',' '}
-	},
-	{
-		{' ',' ',' '},
-		{' ',' ',' '},
-		{' ',' ',' '}
-	},
-};
+char grid[9][9];
+
+int X=0, Y=0;
 
 int main(){
 
 	char ans='y';
-
+	newGame();
 	while(ans!='N'&&ans!='n'){
 		play();
 		cout << "Nowa Gra? (Y/n): ";
@@ -75,31 +31,13 @@ void play(){
 
 	while(!gameover){
 		system("clear||cls");
-		/* cout << player << endl; */
 
-		for(int i = 0; i < 9; i++){
-			int current[][] = grid[i];
-			for(int y=0; y < 3; y++){
-			cout << "|"
-				for(int x=0; x < 3; x++){
-					cout << current[x][y] << "|"
-				}
-			}
-			if(i%3==0){
-				cout << endl;
-			}
-		}
+		printGrid();
 		char in;
 		do{
 			in = getchar();
 		}while(in==0x0a);
 		processInput(in);
-		/* if(checkWin()){ */
-		/* 	gameover=true; */
-		/* 	/1* cout << "Wygrywa " << player=='x' ? 'o' : 'x' << "."; *1/ */
-		/* 	printf("Wygrywa gracz %c\n", player ? 'x' : 'o'); */
-		/* 	return; */
-		/* } */
 		player = !player;
 	}
 
@@ -153,13 +91,18 @@ void processInput(char in){
 			y=-1;
 			break;
 	}
-	grid[x][y] = player==true ? 'x' : 'o';
-	/* player = player=='x' ? 'o' : 'x'; */
+	int px = 3*X+x;
+	int py = 3*Y+y;
+
+	grid[px][py] = player==true ? 'x' : 'o';
+
+	X=x;
+	Y=y;
 }
 
 void newGame(){
-	for(int x=0;x<3;x++){
-		for(int y=0;y<3;y++){
+	for(int x=0;x<9;x++){
+		for(int y=0;y<9;y++){
 			grid[x][y] = ' ';
 		}
 	}
@@ -167,6 +110,33 @@ void newGame(){
 	turns=0;
 }
 
+void printGrid(){
+	cout << "\u250c\u2500\u2500\u252c\u2500\u2500\u252c\u2500\u2500\u2530\u2500\u2500\u252c\u2500\u2500\u252c\u2500\u2500\u2530\u2500\u2500\u252c\u2500\u2500\u252c\u2500\u2500\u2510" << endl << "\u2502 ";
+	for (int y = 0; y < 8; ++y) {
+		for (int x = 0; x < 9; ++x) {
+			cout << grid[x][y];
+			if(x==2||x==5)
+				cout << "\u2503 ";
+			else
+				cout << "\u2502 ";
+		}
+		if(y==2||y==5)
+			cout << endl << "\u251d\u2501\u2501\u253f\u2501\u2501\u253f\u2501\u2501\u254b\u2501\u2501\u253f\u2501\u2501\u253f\u2501\u2501\u254b\u2501\u2501\u253f\u2501\u2501\u253f\u2501\u2501\u2525" << endl << "\u2502 ";
+		else
+			cout << endl << "\u251c\u2500\u2500\u253c\u2500\u2500\u253c\u2500\u2500\u2542\u2500\u2500\u253c\u2500\u2500\u253c\u2500\u2500\u2542\u2500\u2500\u253c\u2500\u2500\u253c\u2500\u2500\u2524" << endl << "\u2502 ";
+	}
+	for (int x = 0; x < 9; ++x) {
+		cout << grid[x][8];
+		if(x==2||x==5)
+			cout << "\u2503 ";
+		else
+			cout << "\u2502 ";
+	}
+	cout <<endl << "\u2514\u2500\u2500\u2534\u2500\u2500\u2534\u2500\u2500\u2538\u2500\u2500\u2534\u2500\u2500\u2534\u2500\u2500\u2538\u2500\u2500\u2534\u2500\u2500\u2534\u2500\u2500\u2518";
+	cout << endl;
+	cout << "X: " << X;
+	cout << "Y: " << Y;
+}
 
 bool checkWin(){
 	bool zzd = grid[0][0]==grid[0][1]&&grid[0][0]==grid[0][2] && grid[0][0]!=' ';

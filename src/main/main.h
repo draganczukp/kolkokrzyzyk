@@ -10,3 +10,4 @@ void processInput(char in);
 void newGame();
 void play();
 bool checkWin();
+void printGrid();
