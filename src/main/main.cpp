@@ -111,31 +111,51 @@ void newGame(){
 }
 
 void printGrid(){
-	cout << "\u250c\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2530\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2530\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2510" << endl << "\u2502 ";
-	for (int y = 0; y < 8; ++y) {
+	/* cout << TOP_LEFT; */
+	printLine(TOP_LEFT, TOP_LEFT, TOP_RIGHT, TOP_RIGHT, T_L_L, T_L_H, H_LIGHT, H_HEAVY);
+	for (int y = 0; y < 9; ++y) {
+		cout << V_LIGHT << " ";
 		for (int x = 0; x < 9; ++x) {
 			cout << grid[x][y];
 			if(x==2||x==5)
-				cout << " \u2503 ";
+				cout << " " << V_HEAVY <<" ";
 			else
-				cout << " \u2502 ";
+				cout << " " << V_LIGHT << " ";
 		}
-		if(y==2||y==5)
-			cout << endl << "\u251d\u2501\u2501\u2501\u253f\u2501\u2501\u2501\u253f\u2501\u2501\u2501\u254b\u2501\u2501\u2501\u253f\u2501\u2501\u2501\u253f\u2501\u2501\u2501\u254b\u2501\u2501\u2501\u253f\u2501\u2501\u2501\u253f\u2501\u2501\u2501\u2525" << endl << "\u2502 ";
-		else
-			cout << endl << "\u251c\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2542\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2542\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2524" << endl << "\u2502 ";
+		cout << endl;
+		if(y==8){
+			printLine(BOT_LEFT, BOT_LEFT, BOT_RIGHT, BOT_RIGHT, B_L_L, B_L_H, H_LIGHT, H_LIGHT);
+		}else if(y==2||y==5){
+			printLine(L_L_H, L_L_H, R_L_H, R_L_H, X_L_H, X_H_H, H_HEAVY, H_HEAVY);
+		}
+		else{
+			printLine(L_L_L, L_L_L, R_L_L, R_L_L, X_L_L, X_H_L, H_LIGHT, H_LIGHT);
+		}
+		/* cout << endl; */
 	}
-	for (int x = 0; x < 9; ++x) {
-		cout << grid[x][8];
-		if(x==2||x==5)
-			cout << " \u2503 ";
-		else
-			cout << " \u2502 ";
-	}
-	cout <<endl << "\u2514\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2538\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2538\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2518";
+	/* for (int x = 0; x < 9; ++x) { */
+	/* 	cout << grid[x][8]; */
+	/* 	if(x==2||x==5) */
+	/* 		cout << " " << V_HEAVY <<" "; */
+	/* 	else */
+	/* 		cout << " " << V_LIGHT << " "; */
+	/* } */
 	cout << endl;
 	cout << "X: " << X;
 	cout << "Y: " << Y;
+}
+
+void printLine(string left, string left_h, string right, string right_h, string sep, string sep_h, string mid, string mid_h){
+	cout << left;
+	for (int x = 0; x < 9; ++x) {
+		cout << mid << mid << mid;
+		if(x==8)
+			cout << right << endl;
+		else if(x==2||x==5)
+			cout << sep_h;
+		else
+			cout << sep;
+	}
 }
 
 bool checkWin(){

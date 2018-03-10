@@ -13,10 +13,16 @@ main.h
 /home/killermenpl/dev/kolkokrzyzyk/src/main/main.h
 iostream
 -
+string
+-
 math.h
 -
 stdio.h
 -
 stdlib.h
 -
+symbols.h
+/home/killermenpl/dev/kolkokrzyzyk/src/main/symbols.h
+
+/home/killermenpl/dev/kolkokrzyzyk/src/main/symbols.h
 

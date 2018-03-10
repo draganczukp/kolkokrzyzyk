@@ -3,4 +3,5 @@
 
 CMakeFiles/kolkokrzyzyk.dir/src/main/main.cpp.o: ../src/main/main.cpp
 CMakeFiles/kolkokrzyzyk.dir/src/main/main.cpp.o: ../src/main/main.h
+CMakeFiles/kolkokrzyzyk.dir/src/main/main.cpp.o: ../src/main/symbols.h
 
