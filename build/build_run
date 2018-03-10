@@ -1,4 +1,2 @@
 #!/bin/zsh
-cmake ..
-make
-./example
+cmake .. && make && ./kolkokrzyzyk
