@@ -112,42 +112,43 @@ void newGame(){
 
 void printGrid(){
 	/* cout << TOP_LEFT; */
-	printLine(TOP_LEFT, TOP_LEFT, TOP_RIGHT, TOP_RIGHT, T_L_L, T_L_H, H_LIGHT, H_HEAVY);
+	printLine(TOP_LEFT, TOP_RIGHT, T_L_L, T_L_H, H_LIGHT,0);
 	for (int y = 0; y < 9; ++y) {
 		cout << V_LIGHT << " ";
 		for (int x = 0; x < 9; ++x) {
+			bool condition = (y>=Y*3 && y < (Y+1)*3) && (x>=X*3 && x<(X+1)*3);
+			if(condition)
+				cout << RED;
 			cout << grid[x][y];
 			if(x==2||x==5)
 				cout << " " << V_HEAVY <<" ";
 			else
 				cout << " " << V_LIGHT << " ";
+			if(condition)
+				cout << RESET;
 		}
 		cout << endl;
 		if(y==8){
-			printLine(BOT_LEFT, BOT_LEFT, BOT_RIGHT, BOT_RIGHT, B_L_L, B_L_H, H_LIGHT, H_LIGHT);
+			printLine(BOT_LEFT, BOT_RIGHT, B_L_L, B_L_H, H_LIGHT,y);
 		}else if(y==2||y==5){
-			printLine(L_L_H, L_L_H, R_L_H, R_L_H, X_L_H, X_H_H, H_HEAVY, H_HEAVY);
+			printLine(L_L_H, R_L_H, X_L_H, X_H_H, H_HEAVY,y);
 		}
 		else{
-			printLine(L_L_L, L_L_L, R_L_L, R_L_L, X_L_L, X_H_L, H_LIGHT, H_LIGHT);
+			printLine(L_L_L, R_L_L, X_L_L, X_H_L, H_LIGHT,y);
 		}
-		/* cout << endl; */
 	}
-	/* for (int x = 0; x < 9; ++x) { */
-	/* 	cout << grid[x][8]; */
-	/* 	if(x==2||x==5) */
-	/* 		cout << " " << V_HEAVY <<" "; */
-	/* 	else */
-	/* 		cout << " " << V_LIGHT << " "; */
-	/* } */
 	cout << endl;
 	cout << "X: " << X;
 	cout << "Y: " << Y;
 }
 
-void printLine(string left, string left_h, string right, string right_h, string sep, string sep_h, string mid, string mid_h){
+void printLine(string left, string right, string sep, string sep_h, string mid, int y){
 	cout << left;
+
 	for (int x = 0; x < 9; ++x) {
+		bool condition = (y>=Y*3 && y < (Y+1)*3) && (x>=X*3 && x<(X+1)*3);
+		if(condition)
+			cout << RED;
 		cout << mid << mid << mid;
 		if(x==8)
 			cout << right << endl;
@@ -155,22 +156,12 @@ void printLine(string left, string left_h, string right, string right_h, string 
 			cout << sep_h;
 		else
 			cout << sep;
+		if(condition)
+			cout << RESET;
 	}
 }
 
+//TODO
 bool checkWin(){
-	bool zzd = grid[0][0]==grid[0][1]&&grid[0][0]==grid[0][2] && grid[0][0]!=' ';
-	bool jzd = grid[1][0]==grid[1][1]&&grid[1][0]==grid[1][2] && grid[1][0]!=' ';
-	bool dzd = grid[2][0]==grid[2][1]&&grid[2][0]==grid[2][2] && grid[2][0]!=' ';
-
-	bool zzl = grid[0][0]==grid[1][0]&&grid[0][0]==grid[2][0] && grid[0][0]!=' ';
-	bool zjl = grid[0][1]==grid[1][1]&&grid[0][1]==grid[2][1] && grid[0][1]!=' ';
-	bool zdl = grid[0][2]==grid[1][2]&&grid[0][2]==grid[2][2] && grid[0][1]!=' ';
-
-	bool zzs = grid[0][0]==grid[1][1]&&grid[0][0]==grid[2][2] && grid[0][0]!=' ';
-	bool dds = grid[2][0]==grid[1][1]&&grid[2][0]==grid[0][2] && grid[2][0]!=' ';
-
-	return zzd || jzd || dzd
-		|| zzl || zjl || zdl
-		|| zzs || dds;
+	return false;
 }

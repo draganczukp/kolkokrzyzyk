@@ -4,29 +4,12 @@
 
 #else
 
-/* FOREGROUND */
-#define RST  "\x1B[0m"
-#define KRED  "\x1B[31m"
-#define KGRN  "\x1B[32m"
-#define KYEL  "\x1B[33m"
-#define KBLU  "\x1B[34m"
-#define KMAG  "\x1B[35m"
-#define KCYN  "\x1B[36m"
-#define KWHT  "\x1B[37m"
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m"
+#define BLUE    "\x1b[34m"
+#define MAGENTA "\x1b[35m"
+#define CYAN    "\x1b[36m"
+#define RESET   "\x1b[0m"
 
-#define FGRN(x) KGRN x RST
-#define FYEL(x) KYEL x RST
-#define FBLU(x) KBLU x RST
-#define FMAG(x) KMAG x RST
-#define FCYN(x) KCYN x RST
-
-#define BOLD(x)	"\x1B[1m" x RST
-#define UNDL(x)	"\x1B[4m" x RST
-
-std::string FRED(std::string s){
-	return KRED << s << RST;
-}
-std::string FWHT(std::string s){
-	return KWHT << s << RST;
-}
 #endif
