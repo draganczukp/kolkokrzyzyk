@@ -26,7 +26,7 @@ int main(){
 	}
 	return 0;
 }
-
+#define ENTER (0x0a)
 void play(){
 
 	while(!gameover){
@@ -36,7 +36,7 @@ void play(){
 		char in;
 		do{
 			in = getchar();
-		}while(in==0x0a);
+		}while(in==ENTER);
 		processInput(in);
 		player = !player;
 	}
