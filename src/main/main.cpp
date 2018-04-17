@@ -26,7 +26,7 @@ int main(){
 	}
 	return 0;
 }
-#define ENTER (0x0a)
+
 void play(){
 
 	while(!gameover){
@@ -37,13 +37,26 @@ void play(){
 		do{
 			in = getchar();
 		}while(in==ENTER);
+
 		processInput(in);
+
 		player = !player;
 	}
 
 }
 void processInput(char in){
-	int x,y;
+	Point point = {0};
+	getInputField(in, &point);
+	int px = 3*X+point.x;
+	int py = 3*Y+point.y;
+
+	grid[px][py] = player==true ? 'x' : 'o';
+
+	X=point.x;
+	Y=point.y;
+}
+
+void getInputField(char in, Point *point) {
 	switch(in){
 		case 'q':
 		case 'Q':
@@ -51,54 +64,48 @@ void processInput(char in){
 			return;
 			break;
 		case '7':
-			x=0;
-			y=0;
+			point->x=0;
+			point->y=0;
 			break;
 		case '8':
-			x=1;
-			y=0;
+			point->x=1;
+			point->y=0;
 			break;
 		case '9':
-			x=2;
-			y=0;
+			point->x=2;
+			point->y=0;
 			break;
 		case '4':
-			x=0;
-			y=1;
+			point->x=0;
+			point->y=1;
 			break;
 		case '5':
-			x=1;
-			y=1;
+			point->x=1;
+			point->y=1;
 			break;
 		case '6':
-			x=2;
-			y=1;
+			point->x=2;
+			point->y=1;
 			break;
 		case '1':
-			x=0;
-			y=2;
+			point->x=0;
+			point->y=2;
 			break;
 		case '2':
-			x=1;
-			y=2;
+			point->x=1;
+			point->y=2;
 			break;
 		case '3':
-			x=2;
-			y=2;
+			point->x=2;
+			point->y=2;
 			break;
 		default:
-			x=-1;
-			y=-1;
+			point->x=-1;
+			point->y=-1;
 			break;
 	}
-	int px = 3*X+x;
-	int py = 3*Y+y;
-
-	grid[px][py] = player==true ? 'x' : 'o';
-
-	X=x;
-	Y=y;
 }
+
 
 void newGame(){
 	for(int x=0;x<9;x++){
@@ -110,21 +117,25 @@ void newGame(){
 	turns=0;
 }
 
+bool shouldColor(int x, int y){
+	return (y>=Y*3 && y < (Y+1)*3) && (x>=X*3 && x<(X+1)*3);
+}
+
 void printGrid(){
 	/* cout << TOP_LEFT; */
 	printLine(TOP_LEFT, TOP_RIGHT, T_L_L, T_L_H, H_LIGHT,0);
 	for (int y = 0; y < 9; ++y) {
 		cout << V_LIGHT << " ";
 		for (int x = 0; x < 9; ++x) {
-			bool condition = (y>=Y*3 && y < (Y+1)*3) && (x>=X*3 && x<(X+1)*3);
-			if(condition)
+			if(shouldColor(x,y))
 				cout << RED;
 			cout << grid[x][y];
 			if(x==2||x==5)
 				cout << " " << V_HEAVY <<" ";
 			else
 				cout << " " << V_LIGHT << " ";
-			if(condition)
+
+			if(shouldColor(x,y))
 				cout << RESET;
 		}
 		cout << endl;
@@ -146,8 +157,7 @@ void printLine(string left, string right, string sep, string sep_h, string mid, 
 	cout << left;
 
 	for (int x = 0; x < 9; ++x) {
-		bool condition = (y>=Y*3 && y < (Y+1)*3) && (x>=X*3 && x<(X+1)*3);
-		if(condition)
+		if(shouldColor(x,y))
 			cout << RED;
 		cout << mid << mid << mid;
 		if(x==8)
@@ -156,7 +166,7 @@ void printLine(string left, string right, string sep, string sep_h, string mid, 
 			cout << sep_h;
 		else
 			cout << sep;
-		if(condition)
+		if(shouldColor(x,y))
 			cout << RESET;
 	}
 }
