@@ -44,6 +44,7 @@ void play(){
 	}
 
 }
+
 void processInput(char in){
 	Point point = {0};
 	getInputField(in, &point);
@@ -113,8 +114,12 @@ void newGame(){
 			grid[x][y] = ' ';
 		}
 	}
+
 	gameover = false;
 	turns=0;
+	X = 1;
+	Y = 1;
+	player = 'x';
 }
 
 bool shouldColor(int x, int y){
