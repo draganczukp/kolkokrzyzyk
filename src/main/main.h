@@ -25,3 +25,4 @@ void printGrid();
 void printLine(string left, string right, string sep, string sep_h, string mid_h, int y);
 void getInputField(char in, Point *point);
 bool shouldColor(int x, int y);
+bool isInputValid(char in);

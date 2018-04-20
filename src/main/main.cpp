@@ -36,7 +36,7 @@ void play(){
 		char in;
 		do{
 			in = getchar();
-		}while(in==ENTER);
+		}while(!isInputValid(in));
 
 		processInput(in);
 
@@ -45,13 +45,18 @@ void play(){
 
 }
 
+bool isInputValid(char in) {
+	return (in >= '1' && in <= '9')||(in=='q'||in=='Q');
+}
+
+
 void processInput(char in){
 	Point point = {0};
 	getInputField(in, &point);
 	int px = 3*X+point.x;
 	int py = 3*Y+point.y;
 
-	grid[px][py] = player==true ? 'x' : 'o';
+	grid[px][py] = player ? 'x' : 'o';
 
 	X=point.x;
 	Y=point.y;
@@ -127,53 +132,68 @@ bool shouldColor(int x, int y){
 }
 
 void printGrid(){
-	/* cout << TOP_LEFT; */
 	printLine(TOP_LEFT, TOP_RIGHT, T_L_L, T_L_H, H_LIGHT,0);
-	for (int y = 0; y < 9; ++y) {
-		cout << V_LIGHT << " ";
-		for (int x = 0; x < 9; ++x) {
-			if(shouldColor(x,y))
-				cout << RED;
-			cout << grid[x][y];
-			if(x==2||x==5)
-				cout << " " << V_HEAVY <<" ";
-			else
-				cout << " " << V_LIGHT << " ";
 
-			if(shouldColor(x,y))
+	for (int y = 0; y < 9; ++y) {
+
+		cout << V_LIGHT << " ";
+
+		for (int x = 0; x < 9; ++x) {
+			bool isColoring = shouldColor(x,y);
+			if(isColoring)
+				cout << RED;
+
+			cout << grid[x][y];
+
+			cout << " ";
+
+			if(x==2 || x==5)
+				cout << V_HEAVY;
+			else
+				cout << V_LIGHT;
+
+			cout <<" ";
+
+			if(isColoring)
 				cout << RESET;
 		}
+
 		cout << endl;
-		if(y==8){
-			printLine(BOT_LEFT, BOT_RIGHT, B_L_L, B_L_H, H_LIGHT,y);
-		}else if(y==2||y==5){
+
+		if(y==2||y==5){
 			printLine(L_L_H, R_L_H, X_L_H, X_H_H, H_HEAVY,y);
 		}
+		else if(y==8)
+			printLine(BOT_LEFT, BOT_RIGHT, B_L_L, B_L_H, H_LIGHT,y);
 		else{
 			printLine(L_L_L, R_L_L, X_L_L, X_H_L, H_LIGHT,y);
 		}
 	}
-	cout << endl;
-	cout << "X: " << X;
-	cout << "Y: " << Y;
+
+
+	cout << endl << "$> ";
 }
 
 void printLine(string left, string right, string sep, string sep_h, string mid, int y){
+
 	cout << left;
 
 	for (int x = 0; x < 9; ++x) {
 		if(shouldColor(x,y))
 			cout << RED;
 		cout << mid << mid << mid;
-		if(x==8)
-			cout << right << endl;
-		else if(x==2||x==5)
+
+		if(x==2||x==5)
 			cout << sep_h;
+		else if(x==8)
+			cout << right << endl;
 		else
 			cout << sep;
+
 		if(shouldColor(x,y))
 			cout << RESET;
 	}
+
 }
 
 //TODO
